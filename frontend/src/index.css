@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Matches PublicLayout sticky header (padding + bar) — hero uses this to overlap under the nav */
+    --public-header-h: 7rem;
+  }
+  @media (min-width: 640px) {
+    :root {
+      --public-header-h: 7.5rem;
+    }
+  }
+  @media (min-width: 768px) {
+    :root {
+      --public-header-h: 8rem;
+    }
+  }
+  html {
+    @apply scroll-smooth overflow-x-hidden;
+  }
+  body {
+    @apply text-sand-100 font-sans antialiased;
+    background-color: #0a0a0b;
+    /* Depth without grain — smooth editorial base */
+    background-image:
+      radial-gradient(ellipse 110% 70% at 50% -25%, rgba(201, 169, 98, 0.09), transparent 58%),
+      radial-gradient(ellipse 90% 55% at 100% 85%, rgba(0, 0, 0, 0.55), transparent 58%),
+      radial-gradient(ellipse 70% 45% at 0% 60%, rgba(18, 18, 20, 0.9), transparent 55%),
+      linear-gradient(180deg, #0c0c0e 0%, #0a0a0b 45%, #080809 100%);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* shadcn-style design tokens (Tailwind v3 project — use with hsl(var(--primary)) if you add shadcn components) */
+:root {
+  --background: rgb(253, 251, 247);
+  --foreground: rgb(74, 59, 51);
+  --card: rgb(248, 244, 238);
+  --card-foreground: rgb(74, 59, 51);
+  --popover: rgb(248, 244, 238);
+  --popover-foreground: rgb(74, 59, 51);
+  --primary: rgb(180, 83, 9);
+  --primary-foreground: rgb(255, 255, 255);
+  --secondary: rgb(228, 192, 144);
+  --secondary-foreground: rgb(87, 83, 78);
+  --muted: rgb(241, 233, 218);
+  --muted-foreground: rgb(120, 113, 108);
+  --accent: rgb(242, 218, 186);
+  --accent-foreground: rgb(87, 83, 78);
+  --destructive: rgb(153, 27, 27);
+  --destructive-foreground: rgb(255, 255, 255);
+  --border: rgb(228, 217, 188);
+  --input: rgb(228, 217, 188);
+  --ring: rgb(180, 83, 9);
+  --radius: 0.3rem;
+}
+
+.dark {
+  --background: rgb(28, 25, 23);
+  --foreground: rgb(245, 245, 244);
+  --card: rgb(41, 37, 36);
+  --card-foreground: rgb(245, 245, 244);
+  --popover: rgb(41, 37, 36);
+  --popover-foreground: rgb(245, 245, 244);
+  --primary: rgb(249, 115, 22);
+  --primary-foreground: rgb(255, 255, 255);
+  --secondary: rgb(87, 83, 78);
+  --secondary-foreground: rgb(231, 229, 228);
+  --muted: rgb(32, 29, 26);
+  --muted-foreground: rgb(168, 162, 158);
+  --accent: rgb(30, 66, 82);
+  --accent-foreground: rgb(231, 229, 228);
+  --destructive: rgb(220, 38, 38);
+  --destructive-foreground: rgb(255, 255, 255);
+  --border: rgb(68, 64, 60);
+  --input: rgb(68, 64, 60);
+  --ring: rgb(249, 115, 22);
+}

@@ -6,6 +6,21 @@ Modern photography portfolio and booking platform: **React (Vite) + Tailwind + F
 
 ```
 HK_Photo_Lounge/
+├── src/                     # Vite + React app source
+│   ├── api/                  # fetch client
+│   ├── contexts/             # Auth (JWT in localStorage)
+│   ├── layouts/              # Public + Admin shells
+│   ├── pages/                # Public site + admin CRUD
+│   ├── components/
+│   │   └── ui/               # shadcn-style primitives (e.g. hero-button-expendable.tsx)
+│   ├── lib/                  # utils.ts (cn), assets helpers
+│   ├── App.jsx
+│   └── main.jsx
+├── public/
+├── components.json           # shadcn CLI config (aliases → @/components, @/lib/utils)
+├── tsconfig.json
+├── vite.config.js
+├── package.json              # Frontend package + optional API/web scripts
 ├── backend/                 # Express REST API
 │   ├── db/
 │   │   └── schema.sql       # Reference SQL (mirrors runtime migrations)
@@ -18,22 +33,6 @@ HK_Photo_Lounge/
 │   │   └── server.js
 │   ├── uploads/             # Local image storage (gitignored)
 │   └── package.json
-├── frontend/                # Vite + React
-│   ├── public/
-│   ├── src/
-│   │   ├── api/             # fetch client
-│   │   ├── contexts/        # Auth (JWT in localStorage)
-│   │   ├── layouts/         # Public + Admin shells
-│   │   ├── pages/           # Public site + admin CRUD
-│   │   ├── components/
-│   │   │   └── ui/          # shadcn-style primitives (e.g. hero-button-expendable.tsx)
-│   │   ├── lib/             # utils.ts (cn), assets helpers
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   ├── components.json      # shadcn CLI config (aliases → @/components, @/lib/utils)
-│   ├── tsconfig.json
-│   └── package.json
-├── package.json             # Optional: run API + web together
 └── README.md
 ```
 
@@ -60,7 +59,6 @@ HK_Photo_Lounge/
 2. **Frontend**
 
    ```bash
-   cd frontend
    npm install
    npm run dev
    ```
@@ -74,7 +72,7 @@ HK_Photo_Lounge/
 - **Default UI folder:** `src/components/ui/` is the conventional location for shadcn-generated primitives. **`components.json`** points aliases there so `npx shadcn@latest add …` drops files in the expected place and imports stay consistent with the ecosystem.
 - **Utilities:** `src/lib/utils.ts` exports `cn()` (`clsx` + `tailwind-merge`) for class merging when you add shadcn components.
 - **Tailwind:** This app uses **Tailwind CSS v3** (PostCSS). Prompts that use `@import "tailwindcss"` and `@theme` target **Tailwind v4**; those were not applied wholesale to avoid breaking the build. shadcn-compatible **CSS variables** live in `src/index.css` (`:root` / `.dark`).
-- **Init shadcn on a fresh Vite+TS project:** from `frontend/`, run `npx shadcn@latest init` and follow prompts (it reads or creates `components.json`). Then `npx shadcn@latest add button` (etc.).
+- **Init shadcn on a fresh Vite+TS project:** from the repo root, run `npx shadcn@latest init` and follow prompts (it reads or creates `components.json`). Then `npx shadcn@latest add button` (etc.).
 
 3. **Optional — single command from repo root**
 

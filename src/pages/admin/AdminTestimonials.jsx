@@ -31,15 +31,7 @@ export function AdminTestimonials() {
   }, [token]);
 
   async function uploadFile(file) {
-    const fd = new FormData();
-    fd.append('file', file);
-    const res = await fetch(`${import.meta.env.VITE_API_URL || ''}/api/uploads`, {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${token}` },
-      body: fd,
-    });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Upload failed');
+    const data = await api.upload(file, { token });
     return data.path;
   }
 

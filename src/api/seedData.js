@@ -1,0 +1,159 @@
+const now = '2024-06-01T12:00:00.000Z';
+
+export function createSeedData() {
+  const categories = [
+    { id: 1, name: 'Weddings', slug: 'weddings', description: 'Ceremony to reception, told with warmth.', sort_order: 0, created_at: now },
+    { id: 2, name: 'Portraits', slug: 'portraits', description: 'Individuals and families in studio or on location.', sort_order: 1, created_at: now },
+    { id: 3, name: 'Commercial', slug: 'commercial', description: 'Product and brand imagery with a refined edge.', sort_order: 2, created_at: now },
+  ];
+
+  const portfolioItems = [
+    {
+      id: 1,
+      category_id: 1,
+      title: 'Harbour sunset vows',
+      slug: 'harbour-sunset-vows',
+      excerpt: 'An intimate rooftop ceremony overlooking Victoria Harbour.',
+      description: 'Golden hour portraits and candid reception highlights.',
+      cover_image: null,
+      is_featured: 1,
+      featured_order: 10,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: 2,
+      category_id: 2,
+      title: 'Editorial portrait study',
+      slug: 'editorial-portrait-study',
+      excerpt: 'Soft window light and minimal styling.',
+      description: 'Shot on location with a film-inspired grade.',
+      cover_image: null,
+      is_featured: 1,
+      featured_order: 5,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: 3,
+      category_id: 3,
+      title: 'Midnight launch',
+      slug: 'midnight-launch',
+      excerpt: 'Product reveal with sculptural light and controlled colour.',
+      description: 'Shot for a luxury retail opening in Tsim Sha Tsui.',
+      cover_image: null,
+      is_featured: 1,
+      featured_order: 2,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+
+  const services = [
+    {
+      id: 1,
+      title: 'Wedding day coverage',
+      slug: 'wedding-day-coverage',
+      summary: 'Full-day storytelling from prep to send-off.',
+      description: 'Includes online gallery, print rights, and planning consult.',
+      price_hint: 'From HK$18,000',
+      image_path: null,
+      sort_order: 0,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: 2,
+      title: 'Portrait session',
+      slug: 'portrait-session',
+      summary: '1–2 hour session at studio or outdoor.',
+      description: 'Wardrobe guidance and light retouching included.',
+      price_hint: 'From HK$3,200',
+      image_path: null,
+      sort_order: 1,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+    {
+      id: 3,
+      title: 'Event coverage',
+      slug: 'event-coverage',
+      summary: 'Galas, launches, and celebrations — discreet, fast, beautiful.',
+      description: 'Multi-camera options, rapid selects, and next-day highlights available.',
+      price_hint: 'From HK$8,500',
+      image_path: null,
+      sort_order: 2,
+      published: 1,
+      created_at: now,
+      updated_at: now,
+    },
+  ];
+
+  const testimonials = [
+    {
+      id: 1,
+      client_name: 'Maya & Jon',
+      quote: 'They captured every laugh and tear — the gallery still makes us emotional.',
+      role_or_event: 'Wedding — Central',
+      image_path: null,
+      rating: 5,
+      is_featured: 1,
+      sort_order: 0,
+      published: 1,
+      created_at: now,
+    },
+    {
+      id: 2,
+      client_name: 'Leo Chen',
+      quote: 'Crisp commercial shots that elevated our launch campaign.',
+      role_or_event: 'Brand shoot — TST',
+      image_path: null,
+      rating: 5,
+      is_featured: 1,
+      sort_order: 1,
+      published: 1,
+      created_at: now,
+    },
+  ];
+
+  return {
+    users: [
+      {
+        id: 1,
+        email: 'admin@hkphotolounge.com',
+        password: 'changeme123',
+        name: 'Studio Admin',
+        created_at: now,
+      },
+    ],
+    categories,
+    portfolioItems,
+    portfolioImages: [],
+    services,
+    testimonials,
+    inquiries: [],
+    settings: {
+      hero_title: 'Moments, framed in light.',
+      hero_subtitle: 'Hong Kong photography for weddings, portraits, and brands.',
+      about_blurb:
+        'HK Photo Lounge is Harikishan Thakar’s photography — macro, wildlife, events, weddings, and more — based in Brampton and serving the GTA.',
+      contact_email: 'hello@hkphotolounge.com',
+      contact_phone: '+852 0000 0000',
+      social_instagram: '@hkphotolounge',
+    },
+    nextId: {
+      category: 4,
+      portfolio: 4,
+      portfolioImage: 1,
+      service: 4,
+      testimonial: 3,
+      inquiry: 1,
+      user: 2,
+    },
+  };
+}

@@ -176,10 +176,24 @@ export function Footer() {
             © {year} HK Photo Lounge. All rights reserved.
             <span className="mx-2 text-sand-600/80">·</span>
             <Link
+              to="/portal/login"
+              className="text-sand-600/90 transition hover:text-sand-400/90"
+            >
+              Sign in
+            </Link>
+            <span className="mx-2 text-sand-600/80">·</span>
+            <Link
+              to="/portal/register"
+              className="text-sand-600/90 transition hover:text-sand-400/90"
+            >
+              Sign up
+            </Link>
+            <span className="mx-2 text-sand-600/80">·</span>
+            <Link
               to="/admin/login"
               className="text-sand-600/90 transition hover:text-sand-400/90"
             >
-              Studio
+              Admin
             </Link>
           </p>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-sand-500/80">

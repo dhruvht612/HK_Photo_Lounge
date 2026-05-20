@@ -20,6 +20,12 @@ import { AdminTestimonials } from './pages/admin/AdminTestimonials.jsx';
 import { AdminInquiries } from './pages/admin/AdminInquiries.jsx';
 import { AdminSettings } from './pages/admin/AdminSettings.jsx';
 import { ProtectedRoute } from './components/ProtectedRoute.jsx';
+import { PortalLayout } from './layouts/PortalLayout.jsx';
+import { PortalLogin } from './pages/portal/PortalLogin.jsx';
+import { PortalRegister } from './pages/portal/PortalRegister.jsx';
+import { PortalResetPassword } from './pages/portal/PortalResetPassword.jsx';
+import { PortalDashboard } from './pages/portal/PortalDashboard.jsx';
+import { PortalPlaceholder } from './pages/portal/PortalPlaceholder.jsx';
 
 export default function App() {
   return (
@@ -38,10 +44,46 @@ export default function App() {
 
       <Route path="/admin/login" element={<AdminLogin />} />
 
+      <Route path="/portal/login" element={<PortalLogin />} />
+      <Route path="/portal/register" element={<PortalRegister />} />
+      <Route path="/portal/reset-password" element={<PortalResetPassword />} />
+
+      <Route
+        path="/portal"
+        element={
+          <ProtectedRoute role="client">
+            <PortalLayout />
+          </ProtectedRoute>
+        }
+      >
+        <Route index element={<Navigate to="dashboard" replace />} />
+        <Route path="dashboard" element={<PortalDashboard />} />
+        <Route
+          path="bookings"
+          element={<PortalPlaceholder title="My Bookings" phase={3} />}
+        />
+        <Route
+          path="galleries"
+          element={<PortalPlaceholder title="Galleries" phase={5} />}
+        />
+        <Route
+          path="messages"
+          element={<PortalPlaceholder title="Messages" phase={4} />}
+        />
+        <Route
+          path="documents"
+          element={<PortalPlaceholder title="Documents" phase={5} />}
+        />
+        <Route
+          path="inspiration"
+          element={<PortalPlaceholder title="Inspiration Board" phase={6} />}
+        />
+      </Route>
+
       <Route
         path="/admin"
         element={
-          <ProtectedRoute>
+          <ProtectedRoute role="admin">
             <AdminLayout />
           </ProtectedRoute>
         }

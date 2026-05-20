@@ -67,12 +67,18 @@ export async function handleRequest(method, path, { body, token } = {}) {
       if (!user || user.password !== password) err(401, 'Invalid credentials');
       return {
         token: `mock:${user.id}`,
-        user: { id: user.id, email: user.email, name: user.name },
+        user: { id: user.id, email: user.email, name: user.name, role: user.role || 'admin' },
       };
     }
     if (method === 'GET' && segments[1] === 'me') {
       const user = requireAuth(authHeader);
-      return { id: user.id, email: user.email, name: user.name, created_at: user.created_at };
+      return {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role || 'admin',
+        created_at: user.created_at,
+      };
     }
   }
 

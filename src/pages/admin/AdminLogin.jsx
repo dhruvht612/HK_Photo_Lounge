@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 
@@ -21,7 +21,7 @@ export function AdminLogin() {
       await login(email, password);
       navigate(from, { replace: true });
     } catch (ex) {
-      setErr(ex.body?.error || ex.message || 'Login failed');
+      setErr(ex?.message || ex?.body?.error || 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -34,7 +34,13 @@ export function AdminLogin() {
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-md rounded-2xl border border-white/10 bg-ink-900/60 p-8"
       >
-        <h1 className="font-display text-3xl text-sand-50">Admin sign in</h1>
+        <Link
+          to="/"
+          className="inline-flex items-center gap-1 text-sm text-sand-200/60 transition hover:text-sand-100"
+        >
+          ← Back to site
+        </Link>
+        <h1 className="mt-4 font-display text-3xl text-sand-50">Admin sign in</h1>
         <p className="mt-2 text-sm text-sand-200/50">HK Photo Lounge dashboard</p>
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           <label className="block text-sm">

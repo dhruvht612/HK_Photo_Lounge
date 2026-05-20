@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export const publicNavItems = [
   { to: '/', label: 'Home' },
@@ -20,48 +20,79 @@ export function PublicNavBar() {
           </span>
           <span className="hidden text-xs uppercase tracking-[0.25em] text-accent/90 sm:inline">studio</span>
         </NavLink>
-        <nav className="hidden items-center gap-1 md:flex">
-          {publicNavItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.to === '/'}
-              className={({ isActive }) =>
-                `rounded-full px-3 py-1.5 text-sm transition-colors ${
-                  isActive
-                    ? 'bg-white/12 text-sand-50 shadow-sm'
-                    : 'text-sand-200/85 hover:bg-white/[0.06] hover:text-sand-50'
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-        <MobileNav />
+        <div className="flex flex-col gap-3 md:flex-row md:flex-1 md:items-center md:justify-end md:gap-4">
+          <nav className="hidden items-center gap-1 md:flex">
+            {publicNavItems.map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.to === '/'}
+                className={({ isActive }) =>
+                  `rounded-full px-3 py-1.5 text-sm transition-colors ${
+                    isActive
+                      ? 'bg-white/12 text-sand-50 shadow-sm'
+                      : 'text-sand-200/85 hover:bg-white/[0.06] hover:text-sand-50'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
+          <AuthLinks className="hidden md:flex" />
+          <MobileNav />
+        </div>
       </div>
+    </div>
+  );
+}
+
+function AuthLinks({ className = '' }) {
+  return (
+    <div className={`flex flex-wrap items-center gap-2 ${className}`}>
+      <Link
+        to="/portal/login"
+        className="rounded-full px-3 py-1.5 text-sm text-sand-200/90 transition hover:bg-white/[0.06] hover:text-sand-50"
+      >
+        Sign in
+      </Link>
+      <Link
+        to="/portal/register"
+        className="rounded-full bg-teal-500/90 px-3 py-1.5 text-sm font-medium text-ink-950 transition hover:bg-teal-400"
+      >
+        Sign up
+      </Link>
+      <Link
+        to="/admin/login"
+        className="rounded-full px-2 py-1.5 text-xs text-sand-500/80 transition hover:text-sand-300"
+      >
+        Admin
+      </Link>
     </div>
   );
 }
 
 function MobileNav() {
   return (
-    <nav className="flex flex-wrap gap-1 border-t border-white/[0.06] pt-3 md:hidden md:border-0 md:pt-0">
-      {publicNavItems.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          end={item.to === '/'}
-          className={({ isActive }) =>
-            `rounded-full px-2.5 py-1 text-xs transition-colors ${
-              isActive ? 'bg-white/12 text-sand-50' : 'text-sand-200/85 hover:bg-white/[0.06]'
-            }`
-          }
-        >
-          {item.label}
-        </NavLink>
-      ))}
-    </nav>
+    <div className="border-t border-white/[0.06] pt-3 md:hidden">
+      <nav className="flex flex-wrap gap-1">
+        {publicNavItems.map((item) => (
+          <NavLink
+            key={item.to}
+            to={item.to}
+            end={item.to === '/'}
+            className={({ isActive }) =>
+              `rounded-full px-2.5 py-1 text-xs transition-colors ${
+                isActive ? 'bg-white/12 text-sand-50' : 'text-sand-200/85 hover:bg-white/[0.06]'
+              }`
+            }
+          >
+            {item.label}
+          </NavLink>
+        ))}
+      </nav>
+      <AuthLinks className="mt-3 border-t border-white/[0.06] pt-3" />
+    </div>
   );
 }
 

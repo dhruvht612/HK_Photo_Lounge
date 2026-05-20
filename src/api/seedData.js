@@ -128,6 +128,7 @@ export function createSeedData() {
         email: 'admin@hkphotolounge.com',
         password: 'changeme123',
         name: 'Studio Admin',
+        role: 'admin',
         created_at: now,
       },
     ],

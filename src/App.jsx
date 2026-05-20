@@ -44,8 +44,8 @@ export default function App() {
 
       <Route path="/admin/login" element={<AdminLogin />} />
 
-      <Route path="/portal/login" element={<PortalLogin />} />
-      <Route path="/portal/register" element={<PortalRegister />} />
+      <Route path="/portal/login/*" element={<PortalLogin />} />
+      <Route path="/portal/register/*" element={<PortalRegister />} />
       <Route path="/portal/reset-password" element={<PortalResetPassword />} />
 
       <Route

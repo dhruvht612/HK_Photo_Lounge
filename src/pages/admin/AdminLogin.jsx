@@ -18,7 +18,7 @@ export function AdminLogin() {
     setErr(null);
     setLoading(true);
     try {
-      await login(email, password);
+      await login(email, password, { role: 'admin' });
       navigate(from, { replace: true });
     } catch (ex) {
       setErr(ex?.message || ex?.body?.error || 'Login failed');

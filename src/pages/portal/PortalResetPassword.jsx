@@ -1,11 +1,22 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { PortalSupabaseGate } from '../../components/PortalSupabaseGate.jsx';
 
 export function PortalResetPassword() {
-  const { resetPassword } = useAuth();
+  const { resetPassword, useClerk } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (useClerk) {
+      navigate('/portal/login', { replace: true });
+    }
+  }, [useClerk, navigate]);
+
+  if (useClerk) {
+    return null;
+  }
   const [email, setEmail] = useState('');
   const [sent, setSent] = useState(false);
   const [err, setErr] = useState(null);

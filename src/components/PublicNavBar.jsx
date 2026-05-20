@@ -1,4 +1,5 @@
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { ClerkAuthLinks } from './ClerkAuthLinks.jsx';
 
 export const publicNavItems = [
   { to: '/', label: 'Home' },
@@ -39,35 +40,10 @@ export function PublicNavBar() {
               </NavLink>
             ))}
           </nav>
-          <AuthLinks className="hidden md:flex" />
+          <ClerkAuthLinks className="hidden md:flex" />
           <MobileNav />
         </div>
       </div>
-    </div>
-  );
-}
-
-function AuthLinks({ className = '' }) {
-  return (
-    <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-      <Link
-        to="/portal/login"
-        className="rounded-full px-3 py-1.5 text-sm text-sand-200/90 transition hover:bg-white/[0.06] hover:text-sand-50"
-      >
-        Sign in
-      </Link>
-      <Link
-        to="/portal/register"
-        className="rounded-full bg-teal-500/90 px-3 py-1.5 text-sm font-medium text-ink-950 transition hover:bg-teal-400"
-      >
-        Sign up
-      </Link>
-      <Link
-        to="/admin/login"
-        className="rounded-full px-2 py-1.5 text-xs text-sand-500/80 transition hover:text-sand-300"
-      >
-        Admin
-      </Link>
     </div>
   );
 }
@@ -91,7 +67,7 @@ function MobileNav() {
           </NavLink>
         ))}
       </nav>
-      <AuthLinks className="mt-3 border-t border-white/[0.06] pt-3" />
+      <ClerkAuthLinks className="mt-3 border-t border-white/[0.06] pt-3" />
     </div>
   );
 }

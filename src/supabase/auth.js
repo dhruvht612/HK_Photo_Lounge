@@ -1,4 +1,4 @@
-import { supabase } from './client.js';
+import { supabaseAuth } from './client.js';
 
 const REQUEST_TIMEOUT_MS = 20000;
 let activeSignIn = 0;

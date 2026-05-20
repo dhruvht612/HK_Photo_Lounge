@@ -1,0 +1,2 @@
+-- Merged into 008_clerk_profile_ids.sql (policies + requesting_user_id).
+-- If you already ran the updated 008, you do not need this file.

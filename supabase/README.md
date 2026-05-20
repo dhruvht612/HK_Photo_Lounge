@@ -9,7 +9,7 @@ Run migrations in order in the **Supabase SQL Editor**:
 5. [`migrations/005_fix_profiles_rls_recursion.sql`](migrations/005_fix_profiles_rls_recursion.sql) — fix admin login “infinite recursion” on profiles
 6. [`migrations/006_profile_on_signup_trigger.sql`](migrations/006_profile_on_signup_trigger.sql) — auto-create `profiles` on signup (fixes client registration)
 7. [`migrations/007_ensure_profile_rpc.sql`](migrations/007_ensure_profile_rpc.sql) — reliable profile creation on first sign-in (fixes stuck “Signing in…”)
-8. [`migrations/008_clerk_profile_ids.sql`](migrations/008_clerk_profile_ids.sql) — **optional**, only if Clerk user ids (`user_…`) fail on `profiles` (run after 007)
+8. [`migrations/008_clerk_profile_ids.sql`](migrations/008_clerk_profile_ids.sql) — **required for Clerk** — drops policies, text user ids, recreates RLS for JWT `sub` (run after 007; one script, do not run 009 separately)
 
 Then:
 
@@ -22,6 +22,13 @@ When `VITE_CLERK_PUBLISHABLE_KEY` is set (prefer `.env.local`), the client porta
 
 - Admin login still uses **Supabase Auth** (`/admin/login`).
 - Restart `npm run dev` after changing `.env.local`.
+- If the portal dashboard says **Failed to load dashboard** after Clerk sign-in, run migration **008** in the SQL Editor (it drops policies first, then alters columns).
+
+## “Failed to load dashboard” (Clerk signed in)
+
+Run the full **[`008_clerk_profile_ids.sql`](migrations/008_clerk_profile_ids.sql)** once. If you see `cannot alter type of a column used in a policy`, you ran an old version of 008 — use the updated file (it drops policies first).
+
+Hard-refresh the portal after it succeeds.
 
 ## App environment
 

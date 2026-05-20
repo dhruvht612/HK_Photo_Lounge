@@ -146,15 +146,37 @@ export async function fetchRecentActivity(userId) {
     .slice(0, 5);
 }
 
+function formatDashboardError(error) {
+  const msg = error?.message || String(error);
+  if (msg.includes('invalid input syntax for type uuid')) {
+    return 'Clerk user id cannot match UUID columns. Run migration 008_clerk_profile_ids.sql in Supabase SQL Editor, then refresh.';
+  }
+  if (
+    msg.includes('row-level security') ||
+    msg.includes('permission denied') ||
+    msg.includes('JWT')
+  ) {
+    return 'Database blocked this request (RLS). Run migration 008_clerk_profile_ids.sql in Supabase SQL Editor, then refresh.';
+  }
+  return msg;
+}
+
 export async function fetchDashboardData(userId) {
+  const results = await Promise.allSettled([
+    fetchUpcomingBooking(userId),
+    fetchActiveBookingsCount(userId),
+    fetchUnreadMessagesCount(userId),
+    fetchPendingDocumentsCount(userId),
+    fetchRecentActivity(userId),
+  ]);
+
+  const firstError = results.find((r) => r.status === 'rejected');
+  if (firstError) {
+    throw new Error(formatDashboardError(firstError.reason));
+  }
+
   const [upcoming, activeBookings, unreadMessages, pendingDocuments, activity] =
-    await Promise.all([
-      fetchUpcomingBooking(userId),
-      fetchActiveBookingsCount(userId),
-      fetchUnreadMessagesCount(userId),
-      fetchPendingDocumentsCount(userId),
-      fetchRecentActivity(userId),
-    ]);
+    results.map((r) => r.value);
 
   return {
     upcoming,
